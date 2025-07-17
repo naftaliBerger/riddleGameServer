@@ -1,40 +1,45 @@
-import { readDB, writeDB } from "../DAL/dal.js";
+import { getAllriddels, addriddels ,updateRiddelById,deleteRiddleById} from "../DAL/dal.js";
 
-export function getAllRiddles(req, res) {
-  res.json(readDB());
+export async function getAllRiddles(req, res) {
+  try {
+    const riddels = await getAllriddels();
+    res.json(riddels);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to get products" });
+  }
 }
 
-export function getRiddleById(req, res) {
-  const riddles = readDB();
-  const riddle = riddles.find(r => r.id == req.params.id);
-  res.json(riddle);
+// export function getRiddleById(req, res) {
+//   const riddles = readDB();
+//   const riddle = riddles.find(r => r.id == req.params.id);
+//   res.json(riddle);
+// }
+
+export async function createRiddle(req, res) {
+  try {
+    const result = await addriddels(req.body);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to add product" });
+  }
 }
 
-export function createRiddle(req, res) {
-  const { name, taskDescription, correctAnswer } = req.body;
-  const riddles = readDB();
-  const newRiddle = {id: riddles[riddles.length - 1].id + 1,name, taskDescription,  correctAnswer };
-  riddles.push(newRiddle);
-  writeDB(riddles);
-  res.status(201).json(newRiddle);
+export async function updateRiddle(req, res) {
+    try {
+    const id = req.params.id;
+    const result = await updateRiddelById(id, req.body);
+    res.json(result);
+  } catch {
+    res.status(500).json({ error: "Failed to update riddle" });
+  }
 }
 
-export function updateRiddle(req, res) {
-    const id = Number(req.params.id);
-    const riddles = readDB();
-  const index = riddles.findIndex(r => r.id === id);
-
-  const { name, taskDescription, correctAnswer } = req.body;
-  riddles[index] = {id, name,taskDescription,correctAnswer };
-  writeDB(riddles);
-  res.json(riddles[index]);
-}
-
-export function deleteRiddle(req, res) {
-  const riddles = readDB();
-  const id = Number(req.params.id);
-  const filtered = riddles.filter(r => r.id !== id);
-  filtered.forEach((r, i) => r.id = i + 1);
-  writeDB(filtered);
-  res.sendStatus(204);
+export async function deleteRiddle(req, res) {
+  try {
+    const id = req.params.id;
+    const result = await deleteRiddleById(id);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete riddle" });
+  }
 }
