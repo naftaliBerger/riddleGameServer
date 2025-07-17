@@ -1,15 +1,4 @@
-import fs from "fs";
-
-const dbPath = "./riddles/db.txt";
-
-function readDB() {
-  const data = fs.readFileSync(dbPath, "utf8");
-  return JSON.parse(data);
-}
-
-function writeDB(data) {
-  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
-}
+import { readDB, writeDB } from "../DAL/dal.js";
 
 export function getAllRiddles(req, res) {
   res.json(readDB());

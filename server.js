@@ -1,11 +1,11 @@
 import express from "express";
-import riddleRouter from "./riddles/riddleRouter.js";
+import riddleRouter from "./router/riddleRouter.js";
 
 const app = express();
 app.use(express.json());
 
 app.use("/riddles", riddleRouter);
-
-app.listen(3005, () => {
+const PORT = process.env.PORT || 3005;
+app.listen(PORT, () => {
   console.log("Riddle server running at 3005");
 });
