@@ -1,4 +1,4 @@
-import { getAllriddels, addriddels ,updateRiddelById,deleteRiddleById} from "../DAL/dal.js";
+import { getAllriddels, addriddels ,updateRiddelById,deleteRiddleById} from "../DAL/riddlesDAL.js";
 //--------------------------------------------
 export async function getAllRiddles(req, res) {
   try {
