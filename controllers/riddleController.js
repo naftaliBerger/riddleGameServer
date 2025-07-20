@@ -1,5 +1,5 @@
 import { getAllriddels, addriddels ,updateRiddelById,deleteRiddleById} from "../DAL/dal.js";
-
+//--------------------------------------------
 export async function getAllRiddles(req, res) {
   try {
     const riddels = await getAllriddels();
@@ -8,13 +8,7 @@ export async function getAllRiddles(req, res) {
     res.status(500).json({ error: "Failed to get products" });
   }
 }
-
-// export function getRiddleById(req, res) {
-//   const riddles = readDB();
-//   const riddle = riddles.find(r => r.id == req.params.id);
-//   res.json(riddle);
-// }
-
+//--------------------------------------------
 export async function createRiddle(req, res) {
   try {
     const result = await addriddels(req.body);
@@ -23,7 +17,7 @@ export async function createRiddle(req, res) {
     res.status(500).json({ error: "Failed to add product" });
   }
 }
-
+//--------------------------------------------
 export async function updateRiddle(req, res) {
     try {
     const id = req.params.id;
@@ -33,7 +27,7 @@ export async function updateRiddle(req, res) {
     res.status(500).json({ error: "Failed to update riddle" });
   }
 }
-
+//--------------------------------------------
 export async function deleteRiddle(req, res) {
   try {
     const id = req.params.id;
