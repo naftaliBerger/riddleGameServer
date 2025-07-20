@@ -15,7 +15,7 @@ export async function connectDB() {
     if (!db) {    
         await client.connect();
         db = client.db();
-        console.log("Connected to the database");
+        console.log("Connected to the mongoDB");
     }
     return db;
 }

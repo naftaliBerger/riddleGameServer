@@ -1,4 +1,4 @@
-import { connectDB } from "../DB/db.js";
+import { connectDB } from "../DB/mongodb.js";
 import { ObjectId } from "mongodb";
 //--------------------------------------------
 export async function getAllriddels() {
