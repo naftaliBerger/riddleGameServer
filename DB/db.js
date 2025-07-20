@@ -1,8 +1,15 @@
-import{ MongoClient } from "mongodb";
+import{ MongoClient ,Db} from "mongodb";
 import { config } from "dotenv";
 config();
 const client = new MongoClient(process.env.DB_CONNECTION);
 let db;
+
+/**
+ * @type {Db | null}
+ */
+/**
+ * @returns {Promise<Db>}
+ */
 
 export async function connectDB() {
     if (!db) {    
