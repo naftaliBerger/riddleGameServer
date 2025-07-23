@@ -17,10 +17,7 @@ export async function register(req, res) {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const { error } = await insertPlayer({
-      username,
-      password: hashedPassword,
-      role: "user",
+    const { error } = await insertPlayer({username,password: hashedPassword,role: "user",
     });
 
     if (error) {
