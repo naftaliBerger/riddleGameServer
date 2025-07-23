@@ -1,5 +1,5 @@
 import Supabase from "../DB/supabaseDB.js";
-import bcrypt from "bcrypt"; // 🟢 להצפנת סיסמאות
+import bcrypt from "bcrypt";
 
 //--------------------------------------------
 // DAL function to fetch all players from the "Player" table
@@ -20,13 +20,13 @@ export async function updatePlayerById(id, playerData) {
 }
 
 
-// 🟢 מחפש משתמש לפי שם
+
 export async function getUserByUsername(username) {
   const { data, error } = await Supabase.from("players").select("*").eq("username", username).single();
   return { data, error };
 }
 
-// 🟢 משווה בין סיסמה מוצפנת לבקשה
+
 export async function checkPassword(plainPassword, hashedPassword) {
   return await bcrypt.compare(plainPassword, hashedPassword);
 }

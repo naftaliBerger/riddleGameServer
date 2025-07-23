@@ -1,14 +1,14 @@
 import express from "express";
 import {  getAllRiddles,  createRiddle,  updateRiddle,  deleteRiddle,} from "../controllers/riddleController.js";
 
-import { authMiddleware } from "../utils/authMiddleware.js"; // 🟢 בודק טוקן
+import { authMiddleware,requireUser,adminOnly } from "../utils/authMiddleware.js";
 
 const router = express.Router();
 
 router.get("/", getAllRiddles);
-router.post("/", authMiddleware, createRiddle); // 🟢 דרוש משתמש
-router.put("/:id", authMiddleware, updateRiddle); // 🟢 דרוש אדמין
-router.delete("/:id", authMiddleware, deleteRiddle); // 🟢 דרוש אדמין
+router.post("/", authMiddleware, requireUser, createRiddle);
+router.put("/:id", authMiddleware,adminOnly, updateRiddle);
+router.delete("/:id", authMiddleware,adminOnly, deleteRiddle);
 
 export default router;
 

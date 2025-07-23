@@ -10,7 +10,7 @@ export async function getAllRiddles(req, res) {
 }
 
 export async function createRiddle(req, res) {
-  if (!req.user) return res.status(403).json({ error: "Login required" }); // 🟢 דרוש התחברות
+  if (!req.user) return res.status(403).json({ error: "Login required" }); 
   try {
     const result = await addriddels(req.body);
     res.json(result);
@@ -20,7 +20,7 @@ export async function createRiddle(req, res) {
 }
 
 export async function updateRiddle(req, res) {
-  if (req.user?.role !== "admin") return res.status(403).json({ error: "Admin only" }); // 🟢 דרוש אדמין
+  if (req.user?.role !== "admin") return res.status(403).json({ error: "Admin only" }); 
   try {
     const result = await updateRiddelById(req.params.id, req.body);
     res.json(result);
@@ -30,7 +30,7 @@ export async function updateRiddle(req, res) {
 }
 
 export async function deleteRiddle(req, res) {
-  if (req.user?.role !== "admin") return res.status(403).json({ error: "Admin only" }); // 🟢 דרוש אדמין
+  if (req.user?.role !== "admin") return res.status(403).json({ error: "Admin only" });
   try {
     const result = await deleteRiddleById(req.params.id);
     res.json(result);

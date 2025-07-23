@@ -1,7 +1,7 @@
 import {  getAllPlayers,  insertPlayer,  updatePlayerById,  getUserByUsername,  checkPassword} from "../DAL/PlayerDAL.js";
 
-import bcrypt from "bcrypt"; // 🟢 להצפנת סיסמה
-import jwt from "jsonwebtoken"; // 🟢 יצירת טוקן
+import bcrypt from "bcrypt"; 
+import jwt from "jsonwebtoken"; 
 
 export async function getPlayers(req, res) {
   const { data, error } = await getAllPlayers();
@@ -9,7 +9,7 @@ export async function getPlayers(req, res) {
   res.json(data);
 }
 
-// 🟢 רישום משתמש חדש
+
 export async function register(req, res) {
   const { username, password } = req.body;
   if (!username || !password)
@@ -24,19 +24,18 @@ export async function register(req, res) {
     });
 
     if (error) {
-      console.error("❌ Supabase Insert Error:", error); // ✅ כאן תראה את השגיאה האמיתית
+      console.error("Supabase Insert Error:", error); 
       return res.status(500).json({ error: "failed to register user" });
     }
 
     res.status(201).json({ message: "user registered" });
   } catch (e) {
-    console.error("❌ General Error:", e); // ✅ אם יש שגיאה כללית
+    console.error("General Error:", e);
     res.status(500).json({ error: "failed to register user" });
   }
 }
 
 
-// 🟢 התחברות
 export async function login(req, res) {
   const { username, password } = req.body;
   const { data: user, error } = await getUserByUsername(username);

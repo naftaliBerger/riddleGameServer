@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/', getPlayers);
 router.put('/:id', updatePlayer);
-router.post('/register', register); // 🟢 רישום
-router.post('/login', login);       // 🟢 התחברות
+router.post('/register', register);
+router.post('/login', login);
 
 export default router;
 
