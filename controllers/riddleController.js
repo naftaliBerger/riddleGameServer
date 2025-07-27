@@ -1,5 +1,5 @@
 import {  getAllriddels, addriddels, updateRiddelById,deleteRiddleById,} from "../DAL/riddlesDAL.js";
-
+//--------------------------------------------
 export async function getAllRiddles(req, res) {
   try {
     const riddels = await getAllriddels();
@@ -8,7 +8,7 @@ export async function getAllRiddles(req, res) {
     res.status(500).json({ error: "Failed to get riddles" });
   }
 }
-
+//--------------------------------------------
 export async function createRiddle(req, res) {
   if (!req.user) return res.status(403).json({ error: "Login required" }); 
   try {
@@ -18,7 +18,7 @@ export async function createRiddle(req, res) {
     res.status(500).json({ error: "Failed to add riddle" });
   }
 }
-
+//--------------------------------------------
 export async function updateRiddle(req, res) {
   if (req.user?.role !== "admin") return res.status(403).json({ error: "Admin only" }); 
   try {
@@ -28,7 +28,7 @@ export async function updateRiddle(req, res) {
     res.status(500).json({ error: "Failed to update riddle" });
   }
 }
-
+//--------------------------------------------
 export async function deleteRiddle(req, res) {
   if (req.user?.role !== "admin") return res.status(403).json({ error: "Admin only" });
   try {
