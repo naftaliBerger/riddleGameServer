@@ -16,7 +16,12 @@ export async function insertPlayer(playerData) {
 //--------------------------------------------
 // DAL function to update an existing player by ID in the "Player" table
 export async function updatePlayerById(id, playerData) {
-    return await Supabase.from("players").update(playerData).eq("id", id);
+    return await Supabase
+        .from("players")
+        .update(playerData)
+        .eq("id", id)
+        .select()
+        .single();
 }
 
 
@@ -29,4 +34,17 @@ export async function getUserByUsername(username) {
 
 export async function checkPassword(plainPassword, hashedPassword) {
   return await bcrypt.compare(plainPassword, hashedPassword);
+}
+
+export async function updatePlayerByUsername(username, updateFields) {
+  try {
+    const { data, error } = await Supabase
+      .from("players")
+      .update(updateFields)
+      .eq("username", username)
+      .select();
+    return { data, error };
+  } catch (error) {
+    return { data: null, error };
+  }
 }

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPlayers, updatePlayer, register, login } from '../controllers/playersController.js';
+import { getPlayers, updatePlayer, register, login,submitScore  } from '../controllers/playersController.js';
 
 const router = express.Router();
 
@@ -7,6 +7,7 @@ router.get('/', getPlayers);
 router.put('/:id', updatePlayer);
 router.post('/register', register);
 router.post('/login', login);
+router.post("/submit-score", submitScore);
 
 export default router;
 

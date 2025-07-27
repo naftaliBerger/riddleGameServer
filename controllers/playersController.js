@@ -1,4 +1,4 @@
-import {  getAllPlayers,  insertPlayer,  updatePlayerById,  getUserByUsername,  checkPassword} from "../DAL/PlayerDAL.js";
+import {  getAllPlayers,  insertPlayer,  updatePlayerById,  getUserByUsername,  checkPassword,updatePlayerByUsername} from "../DAL/PlayerDAL.js";
 
 import bcrypt from "bcrypt"; 
 import jwt from "jsonwebtoken"; 
@@ -44,7 +44,7 @@ export async function login(req, res) {
   const token = jwt.sign(
     { id: user.id, username: user.username, role: user.role },
     process.env.JWT_SECRET,
-    { expiresIn: "2h" }
+    { expiresIn: "50d" }
   );
 
   res.json({ token });
@@ -57,7 +57,27 @@ export async function updatePlayer(req, res) {
   res.json({ message: "player updated successfully" });
 }
 
+export async function submitScore(req, res) {
+  const { username, time } = req.body;
+  if (!username || typeof time !== "number") {
+    return res.status(400).json({ error: "username and time required" });
+  }
 
+  const { data: player, error } = await getUserByUsername(username);
+  if (error || !player) {
+    return res.status(404).json({ error: "player not found" });
+  }
+
+  const currentBest = player.best_time;
+  if (!currentBest || time < currentBest) {
+    const { error: updateError } = await updatePlayerByUsername(username, { best_time: time });
+    if (updateError) {
+      return res.status(500).json({ error: "failed to update score" });
+    }
+  }
+
+  res.json({ message: "score submitted successfully" });
+}
 
 
 

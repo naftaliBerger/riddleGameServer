@@ -8,7 +8,7 @@ export async function getAllRiddles(req, res) {
     res.status(500).json({ error: "Failed to get riddles" });
   }
 }
-
+//--------------------------------------------
 export async function createRiddle(req, res) {
   if (!req.user) return res.status(403).json({ error: "Login required" }); 
   try {
