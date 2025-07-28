@@ -30,11 +30,7 @@ export async function checkPassword(plainPassword, hashedPassword) {
 //--------------------------------------------
 export async function updatePlayerByUsername(username, updateFields) {
   try {
-    const { data, error } = await Supabase
-      .from("players")
-      .update(updateFields)
-      .eq("username", username)
-      .select();
+    const { data, error } = await Supabase.from("players").update(updateFields).eq("username", username).select();
     return { data, error };
   } catch (error) {
     return { data: null, error };

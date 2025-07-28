@@ -18,7 +18,7 @@ export async function register(req, res) {
     const { error } = await insertPlayer({username,password: hashedPassword,role: "user",
     });
     if (error) {
-      console.error("Supabase Insert Error:", error); 
+      // console.error("Supabase Insert Error:", error); 
       return res.status(500).json({ error: "failed to register user" });
     }
     res.status(201).json({ message: "user registered" });
