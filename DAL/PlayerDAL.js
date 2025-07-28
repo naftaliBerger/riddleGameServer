@@ -14,7 +14,7 @@ export async function insertPlayer(playerData) {
 }
 
 //--------------------------------------------
-// DAL function to update an existing player by ID in the "Player" table
+
 export async function updatePlayerById(id, playerData) {
     return await Supabase.from("players").update(playerData).eq("id", id);     
 }
