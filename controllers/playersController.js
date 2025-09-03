@@ -31,6 +31,8 @@ export async function register(req, res) {
 export async function login(req, res) {
   const { username, password } = req.body;
   const { data: user, error } = await getUserByUsername(username);
+  console.log(user, error);
+  
   if (error || !user) return res.status(403).json({ error: "User not found" });
 
   const match = await checkPassword(password, user.password);
